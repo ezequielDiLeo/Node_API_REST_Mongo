@@ -1,7 +1,11 @@
 
+//npm i express --save
 const express = require('express')
+// npm install mongoose
 const mongoose = require('mongoose')
+//npm i bodyparser
 const bodyParser = require('body-parser')
+
 const {config} = require('dotenv')
 config()
 

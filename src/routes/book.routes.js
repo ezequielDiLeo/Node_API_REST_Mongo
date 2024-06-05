@@ -106,10 +106,10 @@ router.put('/:id', getBook, async(req, res) => {
     }
 })
 
-router.put('/:id', getBook, async(req, res) => {
+router.patch('/:id', getBook, async(req, res) => {
     if(!req.body.title && !req.body.author && !req.body.genre && !req.body.publication_date){
         res.status(400).json({
-            mesagge: 'Al menos uno de estos campos deben ser enviados: Título, Autor, Género o fecha de publicación'
+            message: 'Al menos uno de estos campos deben ser enviados: Título, Autor, Género o fecha de publicación'
         })
     }
     try{
@@ -129,13 +129,15 @@ router.put('/:id', getBook, async(req, res) => {
     }
 })
 
-router.delete('/:id', getBook, async(req, res) => {
+router.delete('/:id', getBook, async (req, res) => {
     try {
         const book = res.book
-        await book.remove
+        await book.deleteOne({
+            _id: book._id
+        });
         res.json({
-            message:`El libro ${book.title} fue eliminado correctamente`
-        })
+            message: `El libro ${book.title} fue eliminado correctamente`
+        });
     } catch(error){
         res.status(500).json({
             message: error.message
