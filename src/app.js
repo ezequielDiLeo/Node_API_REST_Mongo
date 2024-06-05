@@ -5,6 +5,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 //npm i bodyparser
 const bodyParser = require('body-parser')
+//npm i cors --save
+const cors = require('cors')
 
 const {config} = require('dotenv')
 config()
@@ -17,7 +19,7 @@ const {bookSchema} = require('./models/book.model')
 const app = express();
 app.use(bodyParser.json()) // parseardor de bodies
 
-// app.use(cors());
+app.use(cors());
 
 
 //Acá conectaremos la base de datos:
