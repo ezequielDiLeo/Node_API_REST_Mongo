@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
 //crear un nuevo libro (recurso) [POST]
 
 router.post('/', async (req, res) => {
-    const { title, author, genre, publication_date } = req?.body
+    const { title, author, genre, publication_date, image} = req?.body
     if (!title || !author || !genre || !publication_date ){
         return res.status(400).json({
             message: 'los campos titulos, autor, genero y fecha son oblilgatorios'
@@ -66,7 +66,8 @@ router.post('/', async (req, res) => {
             title, 
             author, 
             genre, 
-            publication_date
+            publication_date,
+            image
         }
     )
 
@@ -95,6 +96,7 @@ router.put('/:id', getBook, async(req, res) => {
         book.author = req.body.author || book.author;
         book.genre = req.body.genre || book.genre;
         book.publication_date = req.body.publication_date || book.publication_date;
+        book.image = req.body.genre || book.image;
 
         const updatedBook = await book.save()
         res.json(updatedBook)
@@ -118,6 +120,7 @@ router.patch('/:id', getBook, async(req, res) => {
         book.author = req.body.author || book.author;
         book.genre = req.body.genre || book.genre;
         book.publication_date = req.body.publication_date || book.publication_date;
+        book.image = req.body.genre || book.image;
 
         const updatedBook = await book.save()
         res.json(updatedBook)
